@@ -26,13 +26,14 @@ const Header: React.FC = () => {
         return null
     }
     return (
-        <header className="bg-white shadow-sm border-b border-gray-200 lg:w-3/3 sm:w-full">
+        <header className="bg-white shadow-sm border-b border-gray-200 w-full">
             <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
 
                 {/* Mobile menu button - visible on small screens */}
-                <button className="sm:hidden block p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
-                    <Menu className="h-6 w-6" 
-                    onClick={handleHamburgerClick} 
+                <button className="md:hidden block p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={handleHamburgerClick}
+                >
+                    <Menu className="h-6 w-6"
                     />
                 </button>
 

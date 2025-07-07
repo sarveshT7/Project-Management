@@ -18,14 +18,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
 
     return (
-        <div className='h-screen w-screen bg-gray-100 flex flex-row pr-2'>
+        <div className='h-screen w-screen bg-gray-100 flex flex-row'>
             <div>
                 <Sidebar />
             </div>
             <div className='w-screen flex flex-col flex-1 overflow-hidden'>
                 <Header
-                    // toggleMenu={toggleMenu}
-                    // isMenuVisible={isMenuVisible}
                 />
                 <main 
                     >

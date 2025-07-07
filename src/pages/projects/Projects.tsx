@@ -1,0 +1,91 @@
+import ProjectCard from '@/components/project/ProjectCard';
+import { Project } from '@/types/project';
+import { FilterIcon, PlusIcon, SearchIcon } from 'lucide-react'
+import React from 'react'
+
+const Projects = () => {
+    const projects = [
+        {
+            id: '1',
+            name: 'E-commerce Platform',
+            description: 'Modern e-commerce solution with advanced features',
+            status: 'active' as const,
+            priority: 'high' as const,
+            startDate: '2024-01-15',
+            endDate: '2024-06-15',
+            progress: 65,
+            teamMembers: ['john.doe', 'jane.smith', 'bob.wilson'],
+            budget: 150000,
+            spent: 97500,
+            createdAt: '2024-01-15T10:00:00Z',
+            updatedAt: '2024-03-10T14:30:00Z',
+        },
+        {
+            id: '2',
+            name: 'Mobile App Development',
+            description: 'Cross-platform mobile application',
+            status: 'active' as const,
+            priority: 'medium' as const,
+            startDate: '2024-02-01',
+            endDate: '2024-08-01',
+            progress: 40,
+            teamMembers: ['alice.brown', 'charlie.davis'],
+            budget: 80000,
+            spent: 32000,
+            createdAt: '2024-02-01T09:00:00Z',
+            updatedAt: '2024-03-08T16:45:00Z',
+        },
+    ];
+    return (
+        <div className="space-y-6">
+            <div className="flex items-center justify-between mt-10">
+                <h2 className="text-4xl font-bold text-gray-900 mx-4">Projects</h2>
+                <button
+                    //   onClick={() => setShowForm(true)}
+                    className="flex items-center mx-4 bg-blue-600 hover:bg-blue-700 text-white sm:px-6 px-2.5 sm:py-2 rounded-lg font-medium transition-colors"
+                >
+                    <PlusIcon className="h-5 w-5 mr-2" />
+                    New Project
+                </button>
+            </div>
+            <div className='bg-white rounded-lg shadow-sm p-6 border border-gray-200 mx-4'>
+                <div className="sm:flex sm:space-y-0 space-y-4 items-center space-x-4">
+                    <div className='flex-1'>
+                        <div className='flex relative border-gray-300'>
+                            <SearchIcon className='text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 ' />
+                            <input type="text" placeholder='Search Projects'
+                                className='border border-gray-300  w-full bg-white h-12 rounded-lg 
+                        focus:ring-2 focus: ring-blue-500 focus:border-transparent pl-10' />
+                        </div>
+                    </div>
+                    <div className='flex items-center space-x-2'>
+                        <FilterIcon className='text-gray-400' />
+                        <select className='sm:px-4 px-2 border border-gray-300  bg-white sm:h-12 h-10 rounded-lg'>
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="completed">Completed</option>
+                            <option value="on-hold">On Hold</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <select className='sm:px-4 px-2 border border-gray-300  bg-white sm:h-12 h-10 rounded-lg'>
+                            <option value="all">All Priority</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className='flex space-x-2 mx-4'>
+                {
+                    projects && projects.length > 0 && projects.map((project) => (
+                        <ProjectCard key={project.id} project={project} />
+                    ))
+                }
+            </div>
+        </div>
+    )
+}
+
+export default Projects

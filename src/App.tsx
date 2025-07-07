@@ -4,24 +4,27 @@ import { Button } from './components/ui/button'
 import Header from './components/ui/layouts/Header'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Layout from './components/ui/layouts/Layout'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/dashboard/Dashboard'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
+import Projects from './pages/projects/Projects'
+import Analytics from './pages/analytics/Analytics'
+import Settings from './pages/settings/Settings'
+import Teams from './pages/teams/Teams'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* <div className='w-screen p-2 flex justify-end'> */}
-      {/* <Button className="">Click Here</Button> */}
-      {/* <Header/> */}
-      {/* </div> */}
       <Provider store={store}>
         <Router>
           <Layout>
             <Routes>
               <Route path='/' element={<Dashboard />} />
+              <Route path='/projects' element={<Projects />} />
+              <Route path='/team' element={<Teams />} />
+              <Route path='/analytics' element={<Analytics />} />
+              <Route path='/settings' element={<Settings />} />
             </Routes>
           </Layout>
         </Router>
