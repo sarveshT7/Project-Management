@@ -28,3 +28,9 @@ export interface ProjectCardProps {
     onDelete?: (id: string) => void;
 
 }
+
+export interface ProjectFormProps {
+    project?: Project;
+    onSubmit: (projectData: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>) => void;
+    onCancel: () => void;
+}

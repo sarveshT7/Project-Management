@@ -55,7 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onEdit, onDelete }) 
                 </div>
             </div>
             <div className='mb-4'>
-                <div className='flex'>
+                <div className='flex justify-between mb-2'>
                     <span className='text-gray-600'>Progress </span>
                     <span className='font-medium'>{project.progress}%</span>
                 </div>
@@ -65,6 +65,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onEdit, onDelete }) 
                         style={{ width: `${project.progress}%` }}
                     ></div>
                 </div>
+            </div>
+            <div className='flex items-center justify-between'>
+                <div className='flex -space-x-2'>
+                    {project.teamMembers.map((member) => (
+                        <div className='rounded-full bg-blue-500 font-medium
+                     text-white w-8 h-8 text-center text-xs flex items-center justify-center border border-white'>
+                            <p> {member[0].toUpperCase()} </p>
+                        </div>
+                    ))}
+                </div>
+                <button className='text-blue-600 hover:text-blue-700 text-sm-font-medium'>
+                    View Details
+                </button>
             </div>
         </div >
     )
