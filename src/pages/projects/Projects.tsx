@@ -1,7 +1,8 @@
+import ProjectForm from '@/components/forms/ProjectForm';
 import ProjectCard from '@/components/project/ProjectCard';
 import { Project } from '@/types/project';
 import { FilterIcon, PlusIcon, SearchIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Projects = () => {
     const projects = [
@@ -36,6 +37,11 @@ const Projects = () => {
             updatedAt: '2024-03-08T16:45:00Z',
         },
     ];
+    const [showForm, setShowForm] = useState(false);
+
+    const handleCreateProject = (projectData: any) => {
+        setShowForm(false)
+    }
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between mt-10">
@@ -43,6 +49,7 @@ const Projects = () => {
                 <button
                     //   onClick={() => setShowForm(true)}
                     className="flex items-center mx-4 bg-blue-600 hover:bg-blue-700 text-white sm:px-6 px-2.5 sm:py-2 rounded-lg font-medium transition-colors"
+                    onClick={() => setShowForm(true)}
                 >
                     <PlusIcon className="h-5 w-5 mr-2" />
                     New Project
@@ -84,6 +91,22 @@ const Projects = () => {
                     ))
                 }
             </div>
+            {projects.length === 0 && (
+                <div className="text-center py-12">
+                    <p className="text-gray-500 text-lg">No projects found matching your criteria.</p>
+                </div>
+            )}
+
+            {/* project form modal */}
+            {
+                showForm &&
+                (
+                    <ProjectForm
+                        onSubmit={handleCreateProject}
+                        onCancel={() => setShowForm(false)}
+                    />
+                )
+            }
         </div>
     )
 }
