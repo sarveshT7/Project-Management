@@ -9,20 +9,20 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSubmit, onCancel }
 
     }
     return (
-        <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-            <div className='bg-white h-screen w-full max-w-2xl overflow-y-auto p-6 mb-2'>
-                <div className='flex justify-between mb-2'>
-                    <h2 className='text-2xl font-bold text-gray-900'>
-                        {
-                            project ? 'Edit Project' : 'Create New Project'
-                        }
+        <div className="fixed inset-0 bg-black/50 bg-opacity-100 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-screen overflow-y-auto">
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold text-gray-900">
+                        {project ? 'Edit Project' : 'Create New Project'}
                     </h2>
-                    <button className='hover:bg-gray-100 p-2 rounded-full'>
-                        <X className='h-5 w-5'
-                            onClick={onCancel}
-                        />
+                    <button
+                        onClick={onCancel}
+                        className="p-2 hover:bg-gray-100 rounded-full"
+                    >
+                        <X className="h-5 w-5" />
                     </button>
                 </div>
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>

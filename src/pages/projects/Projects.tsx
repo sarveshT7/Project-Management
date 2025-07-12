@@ -1,5 +1,6 @@
 import ProjectForm from '@/components/forms/ProjectForm';
 import ProjectCard from '@/components/project/ProjectCard';
+import { Button } from '@/components/ui/button';
 import { Project } from '@/types/project';
 import { FilterIcon, PlusIcon, SearchIcon } from 'lucide-react'
 import React, { useState } from 'react'
@@ -43,19 +44,20 @@ const Projects = () => {
         setShowForm(false)
     }
     return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between mt-10">
-                <h2 className="text-4xl font-bold text-gray-900 mx-4">Projects</h2>
-                <button
-                    //   onClick={() => setShowForm(true)}
-                    className="flex items-center mx-4 bg-blue-600 hover:bg-blue-700 text-white sm:px-6 px-2.5 sm:py-2 rounded-lg font-medium transition-colors"
+        <div className="space-y-6 p-4 md:overflow-hidden overflow-y-scroll min-h-screen">
+            <div className="flex items-center justify-between mt-6">
+                <h2 className="text-4xl font-bold text-gray-900">Projects</h2>
+                <Button
+                    //   onClick={() => setShowInviteDialog(true)}
+                    className="bg-blue-600 hover:bg-blue-700"
                     onClick={() => setShowForm(true)}
                 >
                     <PlusIcon className="h-5 w-5 mr-2" />
                     New Project
-                </button>
+                </Button>
+
             </div>
-            <div className='bg-white rounded-lg shadow-sm p-6 border border-gray-200 mx-4'>
+            <div className='bg-white rounded-lg shadow-sm p-6 border border-gray-200'>
                 <div className="sm:flex sm:space-y-0 space-y-4 items-center space-x-4">
                     <div className='flex-1'>
                         <div className='flex relative border-gray-300'>
@@ -84,7 +86,7 @@ const Projects = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex space-x-2 mx-4'>
+            <div className='md:flex space-x-2'>
                 {
                     projects && projects.length > 0 && projects.map((project) => (
                         <ProjectCard key={project.id} project={project} />
