@@ -1,13 +1,16 @@
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { TeamMember } from '@/types/team';
 import { AvatarImage } from '@radix-ui/react-avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs';
-import { FilterIcon, MailIcon, MapPinIcon, MoreVerticalIcon, PhoneIcon, PlusIcon, SearchIcon } from 'lucide-react';
-import React from 'react'
+import { FilterIcon, MailIcon, MapPinIcon, MoreVerticalIcon, PhoneIcon, PlusIcon, SearchIcon, UserIcon } from 'lucide-react';
+import React, { useState } from 'react'
 
 const Teams: React.FC = () => {
+    const [tabVal, setTabVal] = useState('grid')
+    const teams = []
     const mockTeamMembers: TeamMember[] = [
         {
             id: '1',
@@ -142,9 +145,12 @@ const Teams: React.FC = () => {
             </div>
             <Tabs defaultValue="grid" className="space-y-6">
                 <div className="flex items-center justify-between">
-                    <TabsList className='p-4'>
-                        <TabsTrigger className='p-2 bg-white' value="grid">Grid View</TabsTrigger>
-                        <TabsTrigger className='p-2 bg-blue-50' value="table">Table View</TabsTrigger>
+                    <TabsList>
+                        <TabsTrigger onClick={() => setTabVal('grid')}
+                            className={`p-2 ${tabVal === "grid" ? 'bg-white' : 'bg-blue-100'} `} value="grid">Grid View</TabsTrigger>
+                        <TabsTrigger
+                            onClick={() => setTabVal('table')}
+                            className={`p-2 ${tabVal === "table" ? 'bg-white' : 'bg-blue-100'}`} value="table">Table View</TabsTrigger>
                     </TabsList>
 
                     {/* Filters */}
@@ -242,7 +248,92 @@ const Teams: React.FC = () => {
                     </div>
 
                 </TabsContent>
+                <TabsContent value='table'>
+                    <Card className='p-4'>
+                        <Table>
+                            <TableHeader className='hover:bg-gray-50'>
+                                <TableRow>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Member</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Role</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Department</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Status</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Location</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Projects</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Tasks</TableHead>
+                                    <TableHead className='text-gray-500 text-md font-medium'>Join Date</TableHead>
+                                    <TableHead></TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {mockTeamMembers && mockTeamMembers.length > 0 && mockTeamMembers.map((member) => (
+                                    <TableRow key={member.id}>
+                                        <TableCell>
+                                            <div className='flex items-center space-x-2'>
+                                                <Avatar className='h-8 w-8'>
+                                                    <AvatarImage src={member.avatar} alt={member.name} />
+                                                    <AvatarFallback>
+                                                        <h2 className='text-2xl font-medium'>{member.name.split(' ').map(n => n[0]).join('')}</h2>
+                                                    </AvatarFallback>
+                                                </Avatar>
+                                                <div>
+                                                    <div className="font-medium text-gray-900">{member.name}</div>
+                                                    <div className="text-sm text-gray-500">{member.email}</div>
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell >
+                                            <span className={`inline-flex items-center px-2.5 py-2 rounded-full
+                                            text-xs font-medium capitalize ${getRoleBadgeColor(member.role)}
+                                            `}>
+                                                {member.role}
+                                            </span>
+                                        </TableCell>
+                                        <TableCell>
+                                            {member.department}
+                                        </TableCell>
+                                        <TableCell>
+                                            <span className={`inline-flex items-center px-2.5 py-2 rounded-full
+                                            text-xs font-medium capitalize ${getStatusBadgeColor(member.status)}
+                                            `}>
+                                                {member.status}
+                                            </span>
+                                        </TableCell>
+                                        <TableCell>
+                                            {member.location}
+                                        </TableCell>
+                                        <TableCell>
+                                            {member.projectsCount}
+                                        </TableCell>
+                                        <TableCell>
+                                            {member.tasksCompleted}
+                                        </TableCell>
+                                        <TableCell>
+                                            {new Date(member.joinDate).toLocaleDateString()}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button variant="ghost" size="sm">
+                                                <MoreVerticalIcon className="h-4 w-4" />
+                                            </Button>
+                                        </TableCell>
+
+                                    </TableRow>
+                                ))
+
+                                }
+                            </TableBody>
+                        </Table>
+                    </Card>
+                </TabsContent>
             </Tabs>
+            {mockTeamMembers?.length === 0 && (
+                <div className="text-center py-12">
+                    <UserIcon className="mx-auto h-12 w-12 text-gray-400" />
+                    <h3 className="mt-2 text-sm font-medium text-gray-900">No team members found</h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                        No members match your current search and filter criteria.
+                    </p>
+                </div>
+            )}
         </div>
     )
 }
