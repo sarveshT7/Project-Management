@@ -1,3 +1,4 @@
+import InviteDialogue from '@/components/teams/InviteDialogue';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,6 +12,7 @@ import React, { useState } from 'react'
 const Teams: React.FC = () => {
     const [tabVal, setTabVal] = useState('grid')
     const teams = []
+    const [showInviteDialog, setShowInviteDialog] = useState(false)
     const mockTeamMembers: TeamMember[] = [
         {
             id: '1',
@@ -124,6 +126,7 @@ const Teams: React.FC = () => {
                 <Button
                     //   onClick={() => setShowInviteDialog(true)}
                     className="bg-blue-600 hover:bg-blue-700"
+                    onClick={() => setShowInviteDialog(true)}
                 >
                     <PlusIcon className="h-5 w-5 mr-2" />
                     Invite Member
@@ -131,8 +134,8 @@ const Teams: React.FC = () => {
             </div>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
                 {
-                    teamArray && teamArray.length > 0 && teamArray.map((item) => (
-                        <Card >
+                    teamArray && teamArray.length > 0 && teamArray.map((item, index) => (
+                        <Card key={index}>
                             <CardHeader className='pb-2'>
                                 <CardTitle className='text-sm font-medium text-gray-600'>{item.name}</CardTitle>
                             </CardHeader>
@@ -191,7 +194,7 @@ const Teams: React.FC = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                         {
                             mockTeamMembers && mockTeamMembers.length > 0 && mockTeamMembers.map((member) => (
-                                <Card>
+                                <Card key={member.id}>
                                     <CardHeader>
                                         <div className='flex items-start justify-between'>
                                             <div className='flex space-x-2'>
@@ -325,6 +328,10 @@ const Teams: React.FC = () => {
                     </Card>
                 </TabsContent>
             </Tabs>
+            <InviteDialogue
+                open={showInviteDialog}
+                onOpenChange={setShowInviteDialog}
+            />
             {mockTeamMembers?.length === 0 && (
                 <div className="text-center py-12">
                     <UserIcon className="mx-auto h-12 w-12 text-gray-400" />
