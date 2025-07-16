@@ -20,8 +20,8 @@ function App() {
         <Router>
           <Layout>
             <Routes>
-              <Route path='/' element={<Dashboard />} />
-              <Route path='/projects' element={<Projects />} />
+              <Route path='/' element={< Projects />} />
+              <Route path='/projects' element={<Dashboard />} />
               <Route path='/team' element={<Teams />} />
               <Route path='/analytics' element={<Analytics />} />
               <Route path='/settings' element={<Settings />} />
