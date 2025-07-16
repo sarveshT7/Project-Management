@@ -67,7 +67,9 @@ const InviteDialogue: React.FC<InviteMemberDialogProps> = ({
                                 <FormItem>
                                     <FormLabel>Full Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="John Doe" {...field} />
+                                        <Input placeholder="John Doe" {...field}
+                                            className="!border-slate-300 hover:!border-slate-400 focus:!border-slate-500"
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -83,7 +85,10 @@ const InviteDialogue: React.FC<InviteMemberDialogProps> = ({
                                         <div className='relative'>
                                             <MailIcon className='absolute top-1/2 left-3 space-x-2
                                              transform -translate-y-1/2 h-4 w-4 text-gray-400' />
-                                            <Input placeholder='abc@gamil.com' {...field} className='pl-10' />
+                                            <Input placeholder='abc@gamil.com' {...field} className='pl-10
+                                           !border-slate-300 hover:!border-slate-500 focus:!border-slate-500
+                                           
+                                            ' />
                                         </div>
                                     </FormControl>
                                     <FormMessage />
@@ -99,7 +104,9 @@ const InviteDialogue: React.FC<InviteMemberDialogProps> = ({
                                     <Select onValueChange={field.onChange} defaultValue={field.value}
                                     >
                                         <FormControl>
-                                            <SelectTrigger className='w-[400px] !border-slate-300 hover:!border-slate-400 focus:!border-slate-500'>
+                                            <SelectTrigger 
+                                            className='w-full !border-slate-300
+                                             hover:!border-slate-400 focus:!border-slate-500 focus:!ring-2 focus:!ring-offset-0'>
                                                 <SelectValue placeholder="Select a role" />
                                             </SelectTrigger>
                                         </FormControl>
@@ -124,7 +131,7 @@ const InviteDialogue: React.FC<InviteMemberDialogProps> = ({
                                     <FormLabel>Department</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
-                                            <SelectTrigger className='w-[400px] !border-slate-300 hover:!border-slate-400 focus:!border-slate-500'>
+                                            <SelectTrigger className='w-full !border-slate-300 hover:!border-slate-400 focus:!border-slate-500'>
                                                 <SelectValue placeholder="Select a department" />
                                             </SelectTrigger>
                                         </FormControl>

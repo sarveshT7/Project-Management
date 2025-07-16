@@ -163,7 +163,7 @@ const Teams: React.FC = () => {
                             <input
                                 type="text"
                                 placeholder="Search members..."
-                                className=" p-2 pl-10 sm:!max-w-[50vw] !w-[78vw] bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className=" p-2 pl-10 sm:!max-w-[40vw] !w-[86vw] bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                         </div>
 
