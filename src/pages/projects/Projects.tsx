@@ -44,7 +44,7 @@ const Projects = () => {
         setShowForm(false)
     }
     return (
-        <div className="space-y-6 p-4 md:overflow-hidden overflow-y-scroll min-h-screen">
+        <div className="space-y-6 p-4 h-[calc(100vh-64px)] overflow-y-scroll">
             <div className="flex items-center justify-between mt-6">
                 <h2 className="text-4xl font-bold text-gray-900">Projects</h2>
                 <Button
@@ -67,7 +67,7 @@ const Projects = () => {
                         focus:ring-2 focus: ring-blue-500 focus:border-transparent pl-10' />
                         </div>
                     </div>
-                    <div className='flex items-center space-x-2'>
+                    <div className='flex items-center'>
                         <FilterIcon className='text-gray-400' />
                         <select className='sm:px-4 px-2 border border-gray-300  bg-white sm:h-12 h-10 rounded-lg'>
                             <option value="all">All Status</option>
@@ -86,7 +86,7 @@ const Projects = () => {
                     </div>
                 </div>
             </div>
-            <div className='md:flex space-x-2'>
+            <div className='flex flex-wrap gap-4'>
                 {
                     projects && projects.length > 0 && projects.map((project) => (
                         <ProjectCard key={project.id} project={project} />
