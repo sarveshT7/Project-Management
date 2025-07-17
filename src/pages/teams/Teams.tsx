@@ -117,7 +117,7 @@ const Teams: React.FC = () => {
         }
     ]
     return (
-        <div className='space-y-6 p-4 pb-8 h-[calc(100vh-64px)] overflow-y-auto'>
+        <div className='space-y-6 p-4'>
             <div className="flex items-center justify-between mt-6">
                 <div>
                     <h2 className="text-4xl font-bold text-gray-900">Teams</h2>

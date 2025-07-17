@@ -34,3 +34,19 @@ export interface ProjectFormProps {
     onSubmit: (projectData: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>) => void;
     onCancel: () => void;
 }
+
+export interface Task {
+    id: string;
+    title: string;
+    description: string;
+    status: 'todo' | 'in-progress' | 'review' | 'done';
+    priority: 'low' | 'medium' | 'high' | 'critical';
+    assignedTo: string;
+    projectId: string;
+    dueDate: string;
+    tags: string[];
+    estimatedHours: number;
+    actualHours: number;
+    createdAt: string;
+    updatedAt: string;
+}

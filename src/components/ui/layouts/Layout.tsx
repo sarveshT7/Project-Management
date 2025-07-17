@@ -22,11 +22,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
                 <Sidebar />
             </div>
-            <div className='w-screen flex flex-col flex-1 overflow-hidden'>
+            <div className=' h-screen overflow-y-auto h-[calc(100vh-64px)]w-screen flex flex-col flex-1 overflow-hidden'>
                 <Header
                 />
-                <main 
-                    >
+                <main>
                     {children}
                 </main>
             </div>

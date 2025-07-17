@@ -21,7 +21,7 @@ function App() {
           <Layout>
             <Routes>
               <Route path='/' element={< Projects />} />
-              <Route path='/projects' element={<Dashboard />} />
+              <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/team' element={<Teams />} />
               <Route path='/analytics' element={<Analytics />} />
               <Route path='/settings' element={<Settings />} />

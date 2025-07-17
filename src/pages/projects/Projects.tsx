@@ -4,47 +4,47 @@ import { Button } from '@/components/ui/button';
 import { Project } from '@/types/project';
 import { FilterIcon, PlusIcon, SearchIcon } from 'lucide-react'
 import React, { useState } from 'react'
-
+export const projects = [
+    {
+        id: '1',
+        name: 'E-commerce Platform',
+        description: 'Modern e-commerce solution with advanced features',
+        status: 'active' as const,
+        priority: 'high' as const,
+        startDate: '2024-01-15',
+        endDate: '2024-06-15',
+        progress: 65,
+        teamMembers: ['john.doe', 'jane.smith', 'bob.wilson'],
+        budget: 150000,
+        spent: 97500,
+        createdAt: '2024-01-15T10:00:00Z',
+        updatedAt: '2024-03-10T14:30:00Z',
+    },
+    {
+        id: '2',
+        name: 'Mobile App Development',
+        description: 'Cross-platform mobile application',
+        status: 'active' as const,
+        priority: 'medium' as const,
+        startDate: '2024-02-01',
+        endDate: '2024-08-01',
+        progress: 40,
+        teamMembers: ['alice.brown', 'charlie.davis'],
+        budget: 80000,
+        spent: 32000,
+        createdAt: '2024-02-01T09:00:00Z',
+        updatedAt: '2024-03-08T16:45:00Z',
+    },
+];
 const Projects = () => {
-    const projects = [
-        {
-            id: '1',
-            name: 'E-commerce Platform',
-            description: 'Modern e-commerce solution with advanced features',
-            status: 'active' as const,
-            priority: 'high' as const,
-            startDate: '2024-01-15',
-            endDate: '2024-06-15',
-            progress: 65,
-            teamMembers: ['john.doe', 'jane.smith', 'bob.wilson'],
-            budget: 150000,
-            spent: 97500,
-            createdAt: '2024-01-15T10:00:00Z',
-            updatedAt: '2024-03-10T14:30:00Z',
-        },
-        {
-            id: '2',
-            name: 'Mobile App Development',
-            description: 'Cross-platform mobile application',
-            status: 'active' as const,
-            priority: 'medium' as const,
-            startDate: '2024-02-01',
-            endDate: '2024-08-01',
-            progress: 40,
-            teamMembers: ['alice.brown', 'charlie.davis'],
-            budget: 80000,
-            spent: 32000,
-            createdAt: '2024-02-01T09:00:00Z',
-            updatedAt: '2024-03-08T16:45:00Z',
-        },
-    ];
+
     const [showForm, setShowForm] = useState(false);
 
     const handleCreateProject = (projectData: any) => {
         setShowForm(false)
     }
     return (
-        <div className="space-y-6 p-4 h-[calc(100vh-64px)] overflow-y-scroll">
+        <div className="space-y-6 p-4">
             <div className="flex items-center justify-between mt-6">
                 <h2 className="text-4xl font-bold text-gray-900">Projects</h2>
                 <Button
@@ -67,7 +67,7 @@ const Projects = () => {
                         focus:ring-2 focus: ring-blue-500 focus:border-transparent pl-10' />
                         </div>
                     </div>
-                    <div className='flex items-center'>
+                    <div className='flex items-center space-x-2'>
                         <FilterIcon className='text-gray-400' />
                         <select className='sm:px-4 px-2 border border-gray-300  bg-white sm:h-12 h-10 rounded-lg'>
                             <option value="all">All Status</option>
