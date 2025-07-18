@@ -1,65 +1,69 @@
 import { Project, Task } from '@/types/project'
-import { CheckCircleIcon, ClockIcon, DollarSignIcon, FolderIcon } from 'lucide-react';
+import { CheckCircleIcon, ClockIcon, DollarSignIcon, FolderIcon, Icon, LucideIcon } from 'lucide-react';
 import React from 'react'
+import { Card, CardHeader } from '../ui/card';
 
-interface StatsCardsProps {
-    projects: Project[];
-    tasks: Task[];
+
+interface DashboardCardProps {
+    name: string;
+    value: string | number;
+    icon: LucideIcon;
+    variant: 'blue' | 'green' | 'yellow' | 'purple';
+    change: string;
+    changeType: 'increase' | 'decrease';
+    key: number;
 }
-const StatsCard: React.FC<StatsCardsProps> = ({ projects = [], tasks = [] }) => {
-    const activeProjects = projects.filter(p => p.status === "active").length;
-    const completedTasks = tasks.filter(t => t.status === 'done').length;
-    const inProgressTasks = tasks.filter(t => t.status === 'in-progress').length;
-    const totalBudget = projects.reduce((sum, p) => sum + p.budget, 0)
-    const totalSpent = projects.reduce((sum, p) => sum + p.spent, 0);
-    const budgetUtilization = totalBudget > 0 ? (totalSpent / totalBudget) * 100 : 0;
+const StatsCard: React.FC<DashboardCardProps> = ({ name, value, icon: Icon, variant, change, changeType, key }) => {
 
-    const stats = [
-        {
-            name: 'Active Projects',
-            value: activeProjects,
-            icon: FolderIcon,
-            color: 'bg-blue-500',
-            change: '+12%',
-            changeType: 'increase' as const,
-        },
-        {
-            name: 'Completed Tasks',
-            value: completedTasks,
-            icon: CheckCircleIcon,
-            color: 'bg-green-500',
-            change: '+8%',
-            changeType: 'increase' as const,
-        },
-        {
-            name: 'In Progress',
-            value: inProgressTasks,
-            icon: ClockIcon,
-            color: 'bg-yellow-500',
-            change: '-3%',
-            changeType: 'decrease' as const,
-        },
-        {
-            name: 'Budget Utilization',
-            value: `${budgetUtilization.toFixed(1)}%`,
-            icon: DollarSignIcon,
-            color: 'bg-purple-500',
-            change: '+5%',
-            changeType: 'increase' as const,
-        },
-    ];
 
+    const variantStyles = {
+        blue: {
+            background: 'bg-blue-100',
+            icon: 'text-dashboard-blue',
+            iconBg: 'bg-blue-300'
+        },
+        green: {
+            background: 'bg-green-100',
+            icon: 'text-dashboard-green',
+            iconBg: 'bg-green-300'
+        },
+        yellow: {
+            background: 'bg-yellow-100',
+            icon: 'text-dashboard-yellow',
+            iconBg: 'bg-yellow-300'
+        },
+        purple: {
+            background: 'bg-purple-100',
+            icon: 'text-dashboard-purple',
+            iconBg: 'bg-purple-300'
+        }
+    };
+    const styles = variantStyles[variant]
+    console.log('styles', styles)
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-            {
-                stats.map((stat) => (
-                    <div className='flex items-center justify-between'>
-                        <div>{stat.name}</div>
-                        <div><stat.icon /></div>
+        <Card key={key} className={`transition-all duration-300 hover:shadow-lg
+        border-0 ${styles.background}
+        `}>
+            <CardHeader className='flex items-center justify-between'>
+                <div>
+                    <p className='text-sm font-medium text-muted-foreground'>{name}</p>
+                    <div>
+                        <p className='text-2xl font-bold text-foreground'>{value}</p>
+                        <span className={`
+                                        ${changeType === 'increase' ? 'text-green-500 bg-green-300/10' :
+                                'text-destructive bg-destructive/10'
+                            }
+                                        `}>
+                            {change}
+                        </span>
                     </div>
-                ))
-            }
-        </div>
+                </div>
+                <div className={`rounded-full p-3 transition-transform duration-300
+                    hover:scale-110 ${styles.iconBg}`}>
+                    <Icon className={`size-6 ${styles.iconBg} `} />
+                </div>
+            </CardHeader>
+        </Card>
     )
 }
 
