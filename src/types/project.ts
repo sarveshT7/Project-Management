@@ -26,7 +26,7 @@ export interface ProjectCardProps {
     project: Project;
     onEdit?: (project: Project) => void;
     onDelete?: (id: string) => void;
-
+    hide?: boolean;
 }
 
 export interface ProjectFormProps {

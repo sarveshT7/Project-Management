@@ -2,7 +2,7 @@ import { Project, ProjectCardProps } from '@/types/project';
 import { CalendarIcon, DollarSignIcon, MoreVerticalIcon, UsersIcon } from 'lucide-react';
 import React from 'react'
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onEdit, onDelete }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onEdit, onDelete, hide = false }) => {
 
     const getStatusColor = (status: Project['status']) => {
         switch (status) {
@@ -66,7 +66,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onEdit, onDelete }) 
                     ></div>
                 </div>
             </div>
-            <div className='flex items-center justify-between'>
+
+            <div className={`flex items-center justify-between ${hide ? 'hidden' : ''}`}>
                 <div className='flex -space-x-2'>
                     {project.teamMembers.map((member) => (
                         <div className='rounded-full bg-blue-500 font-medium

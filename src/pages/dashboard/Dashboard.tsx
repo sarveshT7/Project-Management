@@ -1,4 +1,6 @@
+import ProjectCard from '@/components/project/ProjectCard'
 import StatsCard from '@/components/project/StatsCard'
+import TasksOverview from '@/components/project/TasksOverview'
 import { fetchProjects } from '@/store/slices/projectSlice'
 import { AppDispatch, RootState } from '@/store/store'
 import { Project, Task } from '@/types/project'
@@ -14,9 +16,9 @@ export const tasks: Task[] = [
         description: 'Create a responsive login page with Tailwind CSS',
         status: 'in-progress',
         priority: 'high',
-        assignedTo: 'user123',
+        assignedTo: 'Vijay',
         projectId: 'projectA',
-        dueDate: '2025-07-25',
+        dueDate: '2025-04-25',
         tags: ['frontend', 'UI', 'auth'],
         estimatedHours: 8,
         actualHours: 5,
@@ -29,9 +31,9 @@ export const tasks: Task[] = [
         description: 'Define and create collections for users and tasks',
         status: 'todo',
         priority: 'medium',
-        assignedTo: 'user456',
+        assignedTo: 'Karan',
         projectId: 'projectA',
-        dueDate: '2025-07-22',
+        dueDate: '2025-05-22',
         tags: ['backend', 'database'],
         estimatedHours: 6,
         actualHours: 0,
@@ -44,7 +46,22 @@ export const tasks: Task[] = [
         description: 'Add authentication using JWT and protect routes',
         status: 'review',
         priority: 'critical',
-        assignedTo: 'user789',
+        assignedTo: 'Mohit',
+        projectId: 'projectA',
+        dueDate: '2025-07-20',
+        tags: ['security', 'auth', 'backend'],
+        estimatedHours: 10,
+        actualHours: 0,
+        createdAt: '2025-07-15T10:00:00Z',
+        updatedAt: '2025-07-15T10:00:00Z',
+    },
+    {
+        id: '4',
+        title: 'Header UI',
+        description: 'Add UI for header',
+        status: 'done',
+        priority: 'critical',
+        assignedTo: 'Swati',
         projectId: 'projectA',
         dueDate: '2025-07-20',
         tags: ['security', 'auth', 'backend'],
@@ -109,7 +126,7 @@ const Dashboard: React.FC = () => {
         },
     ];
     return (
-        <div className="min-h-screen bg-background p-6">
+        <div className="min-h-screen p-6 space-y-4 w-full">
             <div className='max-w-7xl mx-auto'>
                 <div className="mb-8">
                     <h2 className="text-4xl font-bold text-foreground mb-2">Dashboard</h2>
@@ -128,6 +145,48 @@ const Dashboard: React.FC = () => {
                         changeType={stat.changeType}
                     />
                 ))}
+            </div>
+            <div className='w-full rounded-lg shadow-sm border-gray-200
+            flex sm:flex-row flex-col space-y-2 space-x-4
+            '>
+                <div className='bg-white rounded-lg shadow-sm p-6 border-gray-200
+            sm:w-1/2 w-full
+            '>
+                    <div className='flex items-center justify-between mb-6 w-full'>
+                        <h2 className='text-2xl font-bold'>Recent Projects</h2>
+                        <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                            View All
+                        </button>
+                    </div>
+                    <div className='grid grid-cols-1'>
+                        {
+                            projects && projects.length > 0 && projects.slice(0, 3).map((project) => {
+                                return (
+                                    <ProjectCard project={project} />
+                                )
+                            })
+                        }
+                    </div>
+
+                </div>
+                <div className='bg-white rounded-lg shadow-sm p-6 border-gray-200
+            sm:w-1/2 w-full'>
+                    <div className='flex items-center justify-between mb-6 w-full'>
+                        <h2 className='text-2xl font-bold'>Recent Tasks</h2>
+                        <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                            View All
+                        </button>
+                    </div>
+                    <div className='grid grid-cols-1 space-y-3'>
+                        {
+                            tasks && tasks.length > 0 && tasks.slice(0, 4).map((task) => {
+                                return (
+                                    <TasksOverview task={task} />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )
