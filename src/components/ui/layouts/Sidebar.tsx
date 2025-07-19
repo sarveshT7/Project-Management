@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar: React.FC = () => {
     const navigation = [
-        { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-        { name: 'Projects', href: '/', icon: FolderIcon },
+        { name: 'Dashboard', href: '/', icon: HomeIcon },
+        { name: 'Projects', href: '/projects', icon: FolderIcon },
         { name: 'Team', href: '/team', icon: UsersIcon },
         { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
         { name: 'Settings', href: '/settings', icon: CogIcon },
