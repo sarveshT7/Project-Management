@@ -1,6 +1,6 @@
 import ProjectCard from '@/components/project/ProjectCard'
-import StatsCard from '@/components/project/StatsCard'
-import TasksOverview from '@/components/project/TasksOverview'
+import StatsCard from '@/components/dashboard/StatsCard'
+import TasksOverview from '@/components/dashboard/TasksOverview'
 import { fetchProjects } from '@/store/slices/projectSlice'
 import { AppDispatch, RootState } from '@/store/store'
 import { Project, Task } from '@/types/project'
@@ -8,6 +8,7 @@ import { CheckCircle, Clock, DollarSign, Folder } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import RecentActivity from '@/components/dashboard/RecentActivity'
 
 export const tasks: Task[] = [
     {
@@ -71,6 +72,46 @@ export const tasks: Task[] = [
         updatedAt: '2025-07-15T10:00:00Z',
     }
 ]
+
+export const notifications = [
+    {
+        id: '1',
+        title: 'Task Completed',
+        message: 'Design Homepage Layout has been completed by Jane Smith',
+        type: 'success',
+        read: false,
+        timestamp: '2024-03-15T10:30:00Z',
+        actionUrl: '/projects/1'
+    },
+    {
+        id: '2',
+        title: 'New Task Assigned',
+        message: 'You have been assigned to implement user authentication',
+        type: 'task',
+        read: false,
+        timestamp: '2024-02-15T09:15:00Z',
+        actionUrl: '/projects/1'
+    },
+    {
+        id: '3',
+        title: 'Project Deadline Approaching',
+        message: 'E-commerce Platform project deadline is in 3 days',
+        type: 'warning',
+        read: true,
+        timestamp: '2024-01-14T16:45:00Z',
+        actionUrl: '/projects/1'
+    },
+    {
+        id: '4',
+        title: 'Team Member Invited',
+        message: 'Sarah Wilson has joined your team',
+        type: 'team',
+        read: true,
+        timestamp: '2024-03-30T11:20:00Z',
+        actionUrl: '/team'
+    }
+]
+
 
 const Dashboard: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -147,7 +188,7 @@ const Dashboard: React.FC = () => {
                 ))}
             </div>
             <div className='w-full rounded-lg shadow-sm border-gray-200
-            flex sm:flex-row flex-col space-y-2 space-x-4
+            flex sm:flex-row flex-col gap-4
             '>
                 <div className='bg-white rounded-lg shadow-sm p-6 border-gray-200
             sm:w-1/2 w-full
@@ -158,7 +199,7 @@ const Dashboard: React.FC = () => {
                             View All
                         </button>
                     </div>
-                    <div className='grid grid-cols-1'>
+                    <div className='grid grid-cols-1 gap-y-2'>
                         {
                             projects && projects.length > 0 && projects.slice(0, 3).map((project) => {
                                 return (
@@ -169,8 +210,7 @@ const Dashboard: React.FC = () => {
                     </div>
 
                 </div>
-                <div className='bg-white rounded-lg shadow-sm p-6 border-gray-200
-            sm:w-1/2 w-full'>
+                <div className='bg-white rounded-lg shadow-sm p-6 border-gray-200 sm:w-1/2 w-full'>
                     <div className='flex items-center justify-between mb-6 w-full'>
                         <h2 className='text-2xl font-bold'>Recent Tasks</h2>
                         <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
@@ -186,6 +226,14 @@ const Dashboard: React.FC = () => {
                             })
                         }
                     </div>
+                </div>
+
+            </div>
+
+
+            <div className='bg-white rounded-lg shadow-sm p-6 border-gray-200 sm:w-1/2 w-full'>
+                <RecentActivity />
+                <div>
                 </div>
             </div>
         </div>
