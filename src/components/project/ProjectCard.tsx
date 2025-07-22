@@ -24,16 +24,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onEdit, onDelete, hi
     }
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex justify-between flex-col  flex-nowrap
+            md:flex-wrap sm:flex-row sm:justify-between mb-4 gap-2 sm:gap-0">
                 <div className="flex items-center space-x-3">
                     <div className={`w-4 h-4 rounded-full ${getPriorityColor(project.priority)}`}></div>
                     <h3 className="text-xl font-semibold text-gray-900">{project.name}</h3>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project.status)}`}>
                         {project.status}
                     </span>
-                    <button className="p-1 hover:bg-gray-100 rounded">
+                    <button className="p-1 hover:bg-gray-100 rounded flex flex-shrink-1">
                         <MoreVerticalIcon className="h-5 w-5 text-gray-400" />
                     </button>
                 </div>

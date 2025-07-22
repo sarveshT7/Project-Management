@@ -34,30 +34,89 @@ const TasksOverview: React.FC<TasksOverviewProps> = ({ task }) => {
     }
 
     return (
-        <Card className='hover:bg-gray-50 transition-colors rounded-lg shadow-md'>
-            <CardHeader>
-                <div className='flex justify-center items-center gap-x-4'>
-                    <p className='text-sm font-medium text-gray-900 truncate'>{task.title}</p>
-                        {getPriorityIcon(task.priority)}
-                </div>
-                <div className='flex flex-wrap gap-4 sm:gap-4 space-x-4 md:space-x-6 md:flex-nowrap items-center relative text-xs text-gray-500'>
-                    <span className={`size-8 rounded-full ${getStatusColor(task.status)} flex
-                    items-center justify-center`}>
-                        {
-                            task.status === "done" ? '✓' : task.status === 'in-progress' ? '◐' : '○'
-                        }
-                    </span>
-                    <div className={`${isOverDue(task.dueDate) ? 'text-red-600 font-medium' : 'text-gray-500'} flex items-center text-sm`}>
-                        <CalendarIcon className='size-4 mr-2' />
-                        {new Date(task.dueDate).toLocaleDateString()}
-                    </div>
-                    <div className='flex gap-x-2'>
-                        <ClockIcon className='size-4' />
-                        {task.actualHours}/{task.estimatedHours}h
-                    </div>
-                    <span className="capitalize">{task.assignedTo.replace('.', ' ')}</span>
+        // <Card className='hover:bg-gray-50 transition-colors rounded-lg shadow-md'>
+        //     <CardHeader>
+        //         <div className='flex justify-center items-center'>
+        //             <p className='text-sm font-medium text-gray-900 truncate'>{task.title}</p>
+        //             {getPriorityIcon(task.priority)}
+        //         </div>
+        //         <div className='flex flex-wrap sm:justify-between
+        //              md:space-x-6  items-center relative text-xs text-gray-500'>
+        //             <span className={`size-8 rounded-full ${getStatusColor(task.status)} flex
+        //             items-center justify-center flex-shrink-0 sm:max-w-0 max-w-full`}>
+        //                 {
+        //                     task.status === "done" ? '✓' : task.status === 'in-progress' ? '◐' : '○'
+        //                 }
+        //             </span>
+        //             <div className={`${isOverDue(task.dueDate) ? 'text-red-600 font-medium' : 'text-gray-500'} flex items-center text-sm`}>
+        //                 <CalendarIcon className='size-4 mr-2' />
+        //                 {new Date(task.dueDate).toLocaleDateString()}
+        //             </div>
+        //             <div className='flex gap-x-2'>
+        //                 <ClockIcon className='size-4' />
+        //                 {task.actualHours}/{task.estimatedHours}h
+        //             </div>
+        //             <span className="capitalize">{task.assignedTo.replace('.', ' ')}</span>
 
-                    <span className={`px-3 py-2 rounded-full ${getStatusColor(task.status)}`}>
+        //             <span className={`px-3 py-2 rounded-full ${getStatusColor(task.status)}`}>
+        //                 {task.status.replace('-', ' ')}
+        //             </span>
+        //         </div>
+        //     </CardHeader>
+        // </Card>
+        <Card className='hover:bg-gray-50 transition-colors rounded-lg shadow-md'>
+            <CardHeader className="p-4">
+                {/* Title and Priority - Stack on mobile */}
+                <div className='flex sm:items-center justify-center gap-x-2 mb-4'>
+                    <p className='text-sm font-medium text-gray-900 truncate'>{task.title}</p>
+                    <div className="flex-shrink-0">
+                        {getPriorityIcon(task.priority)}
+                    </div>
+                </div>
+
+                {/* Task Details - Responsive Grid */}
+                <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs'>
+                    {/* Status */}
+                    <div className='flex items-center gap-2'>
+                        <span className={`size-6 sm:size-8 rounded-full ${getStatusColor(task.status)} flex
+                items-center justify-center flex-shrink-0 text-xs`}>
+                            {task.status === "done" ? '✓' : task.status === 'in-progress' ? '◐' : '○'}
+                        </span>
+                        {/* <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(task.status)} sm:hidden`}>
+                            {task.status.replace('-', ' ')}
+                        </span> */}
+                    </div>
+
+                    {/* Due Date */}
+                    <div className={`${isOverDue(task.dueDate) ? 'text-red-600 font-medium' : 'text-gray-500'} 
+            flex items-center text-xs`}>
+                        <CalendarIcon className='size-3 sm:size-4 mr-1 sm:mr-2 flex-shrink-0' />
+                        <span className="truncate">
+                            {new Date(task.dueDate).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: window.innerWidth > 640 ? 'numeric' : '2-digit'
+                            })}
+                        </span>
+                    </div>
+
+                    {/* Hours */}
+                    <div className='flex items-center gap-1 text-gray-500 text-xs'>
+                        <ClockIcon className='size-3 sm:size-4 flex-shrink-0' />
+                        <span className="whitespace-nowrap">{task.actualHours}/{task.estimatedHours}h</span>
+                    </div>
+
+                    {/* Assigned To */}
+                    <div className="text-gray-500 text-xs flex items-center">
+                        <span className="capitalize truncate">
+                            {task.assignedTo.replace('.', ' ')}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Status Badge - Hidden on mobile, shown on larger screens */}
+                <div className="hidden sm:flex justify-end mt-3">
+                    <span className={`px-3 py-1 rounded-full text-xs ${getStatusColor(task.status)}`}>
                         {task.status.replace('-', ' ')}
                     </span>
                 </div>
