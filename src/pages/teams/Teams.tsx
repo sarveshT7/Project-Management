@@ -117,10 +117,10 @@ const Teams: React.FC = () => {
         }
     ]
     return (
-        <div className='space-y-6 p-4'>
-            <div className="flex items-center justify-between mt-6">
+        <div className='space-y-6 p-6'>
+            <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-4xl font-bold text-gray-900">Teams</h2>
+                    <h2 className="text-3xl font-bold text-gray-900">Teams</h2>
                     <p className="text-gray-600 mt-1">Manage your team members and their roles</p>
                 </div>
                 <Button

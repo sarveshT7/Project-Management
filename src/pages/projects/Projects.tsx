@@ -44,9 +44,9 @@ const Projects = () => {
         setShowForm(false)
     }
     return (
-        <div className="space-y-6 p-4">
-            <div className="flex items-center justify-between mt-6">
-                <h2 className="text-4xl font-bold text-gray-900">Projects</h2>
+        <div className="space-y-6 p-6">
+            <div className="flex items-center justify-between">
+                <h2 className="text-3xl font-bold text-gray-900">Projects</h2>
                 <Button
                     //   onClick={() => setShowInviteDialog(true)}
                     className="bg-blue-600 hover:bg-blue-700"

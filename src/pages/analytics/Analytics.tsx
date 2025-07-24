@@ -2,8 +2,13 @@ import React from 'react'
 import { projects } from '../projects/Projects'
 import { Project } from '@/types/project';
 import { tasks } from '../dashboard/Dashboard';
-import { Folder, Target } from 'lucide-react';
+import { Briefcase, CheckCircle, Folder, Target, TrendingUp, Users } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ResponsiveContainer, Tooltip, Cell, Pie, PieChart, Legend, LineChart, CartesianGrid, XAxis, YAxis, Line } from 'recharts'
+import LineChartComp from '@/components/analytics/LineChart';
+import PieChartComp from '@/components/analytics/PieChartComp';
+import ProjectProgressOverChart from '@/components/analytics/ProjectProgressOverChart';
+import TeamProdChart from '@/components/analytics/TeamProdChart';
 
 const Analytics = () => {
   const totalProjects = projects.length;
@@ -33,7 +38,7 @@ const Analytics = () => {
   ];
 
   // Sample data for the last 7 days (replace with actual data fetching)
-  const dailyActivityData = [
+  const dailyActivityData: any = [
     { day: 'Day 1', projects: 10, tasks: 25 },
     { day: 'Day 2', projects: 12, tasks: 30 },
     { day: 'Day 3', projects: 8, tasks: 20 },
@@ -44,7 +49,7 @@ const Analytics = () => {
   ];
 
   // Team productivity data for Bar Chart
-  const teamProductivityData = [
+  const teamProductivityData: any = [
     { member: 'John Doe', completedTasks: 15, assignedTasks: 20 },
     { member: 'Jane Smith', completedTasks: 12, assignedTasks: 16 },
     { member: 'Mike Johnson', completedTasks: 18, assignedTasks: 22 },
@@ -53,7 +58,7 @@ const Analytics = () => {
   ];
 
   // Project progress over time for Area Chart
-  const projectProgressData = [
+  const projectProgressData: any = [
     { month: 'Jan', completed: 5, active: 8, planned: 3 },
     { month: 'Feb', completed: 8, active: 12, planned: 5 },
     { month: 'Mar', completed: 12, active: 15, planned: 8 },
@@ -77,7 +82,7 @@ const Analytics = () => {
       </text>
     );
   };
-  const cardData = [
+  const summaryData = [
     {
       title: 'Project Summary',
       icon: Folder,
@@ -99,12 +104,29 @@ const Analytics = () => {
       color: 'bg-teal-200'
     }
   ]
+  const piechartData: any = [
+    {
+      title: 'Project Status',
+      icon: Briefcase,
+      dataFunc: projectStatusData,
+      label: renderCustomizedLabel,
+      color: 'bg-green-200'
+    },
+    {
+      title: 'Task Status',
+      icon: CheckCircle,
+      dataFunc: taskStatusData,
+      label: renderCustomizedLabel,
+      color: 'bg-yellow-200'
+    },
+  ]
   return (
-    <div className='p-4 space-y-6 h-screen w-full'>
-      <h2 className='text-3xl font-bold'>Anlaytics Overview</h2>
+    <div className='p-6 space-y-6 h-screen w-full'>
+      <h2 className='text-3xl font-bold text-gray-900 '>Anlaytics Overview</h2>
+      {/* Project and Task Summary */}
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 w-full'>
         {
-          cardData.map((data, index) => (
+          summaryData.map((data, index) => (
             <Card key={index} className='rounded-lg shadow-md hover:bg-gray-50 transition-colors'>
               <CardHeader>
                 <CardTitle className='flex font-medium text-gray-900 text-xl items-center gap-x-2'>
@@ -129,6 +151,34 @@ const Analytics = () => {
         }
       </div>
 
+      {/*  pie chart */}
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 w-full'>
+        {
+          piechartData.map((data: any, index) => (
+            <PieChartComp data={data} colors={COLORS} key={index} />
+          ))
+        }
+      </div>
+
+      {/* Daily Activity Chart */}
+      <div className='grid grid-cols-1 gap-2 w-full'>
+        <LineChartComp dailyActivityData={dailyActivityData} />
+      </div>
+
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 w-full'>
+        <TeamProdChart teamProductivityData={teamProductivityData} />
+        <ProjectProgressOverChart projectProgressData={projectProgressData} />
+      </div>
+
+      {/* Additional Analytics Content */}
+      <div className="bg-white shadow-md rounded-lg p-4 ">
+        <h2 className="text-lg font-semibold mb-2 flex items-center">
+          <Users className="mr-2 h-5 w-5 text-gray-500" /> Team Performance</h2>
+        <p className="text-gray-600">Analyze team member contributions, task completion rates, and project involvement.</p>
+      </div>
+      <div>
+
+      </div>
     </div>
   )
 }
